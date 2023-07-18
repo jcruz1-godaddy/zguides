@@ -4,6 +4,7 @@ import axios from "axios";
 function FileUpload() {
     const [fileData, setFileData] = useState("");
     const getFile = (e) => {
+        console.log(e);
         setFileData(e.target.files[0]);
     };
 
@@ -27,7 +28,7 @@ function FileUpload() {
             <br></br>
             <input className="u-full-width" type="text" name="channelId" placeholder="Channel ID / User ID" required />
             <br></br>
-            <input type="file" name="file" onChange={getFile} required />
+            <input type="file" name="file" onChange={ getFile } required />
             <input type="submit" name="upload" value="Upload" />
         </form>
     );

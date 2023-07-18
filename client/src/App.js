@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FileUpload from "./FileUpload";
 import logo from './logo.svg';
 import './App.css';
+import styled from 'styled-components';
+import { loadPrompt } from './load';
+
+const Button = styled.button``;
 
 function App() {
+
+    const [filePath, setFilePath] = useState('');
+    const [promptContent, setPromptContent] = useState('');
+    
+    async function handlePromptPost(filePath) {
+        setFilePath(filePath);
+        const res = await loadPrompt(filePath);
+        if (!res.ok) {
+            throw new Error(`Received unexpected status ${res.status} when . ${await res.text()}`);
+        } else {
+            return await res.json();
+        }
+    }
+
     return (
         <div className="App">
             <header className="App-header">
