@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Button from '@ux/button';
 
 function FileUpload() {
     const [fileData, setFileData] = useState("");
@@ -28,7 +29,7 @@ function FileUpload() {
             <input className="u-full-width" type="text" name="channelId" placeholder="Channel ID / User ID" required />
             <br></br>
             <input type="file" name="file" onChange={getFile} required />
-            <input type="submit" name="upload" value="Upload" />
+            <Button design='primary' type="submit" />
         </form>
     );
 }
