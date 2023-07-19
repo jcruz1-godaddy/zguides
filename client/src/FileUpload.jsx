@@ -2,16 +2,22 @@ import React, { useState } from "react";
 import axios from "axios";
 
 function FileUpload() {
+    const [channelId, setChannelId] = useState("");
     const [fileData, setFileData] = useState("");
+
     const getFile = (e) => {
-        console.log(e);
         setFileData(e.target.files[0]);
+    };
+
+    const getChannelId = (e) => {
+        setChannelId(e.target.value);
     };
 
     const uploadFile = (e) => {
         e.preventDefault();
         const data = new FormData();
         data.append("file", fileData);
+        data.append("channelId", channelId);
         axios({
             method: "POST",
             url: "http://localhost:3001/upload",
@@ -26,7 +32,7 @@ function FileUpload() {
         <form onSubmit={uploadFile}>
             <label htmlFor="exampleEmailInput">Channel ID / User ID</label>
             <br></br>
-            <input className="u-full-width" type="text" name="channelId" placeholder="Channel ID / User ID" required />
+            <input className="u-full-width" type="text" name="channelId" placeholder="Channel ID / User ID" onChange={ getChannelId } required />
             <br></br>
             <input type="file" name="file" onChange={ getFile } required />
             <input type="submit" name="upload" value="Upload" />
